@@ -52,6 +52,8 @@
 #define CONTRACT_STATE_VALID 1
 #define CONTRACT_STATE_DELETED 2
 
+#define _CON_ARG_
+
 // blockchain
 #define USE_TYPE_CHECK true 
 
@@ -555,6 +557,44 @@ namespace uvm {
 			virtual bool is_valid_contract_address(lua_State *L, const char *address_str) = 0;
 			virtual const char *get_system_asset_symbol(lua_State *L) = 0;
 			virtual uint64_t get_system_asset_precision(lua_State *L) = 0;
+
+			
+			// for CDC role
+			// get
+			virtual std::vector<std::string> get_privilege_admin(lua_State *L) = 0;
+			virtual std::vector<std::string> get_general_admin(lua_State *L) = 0;
+
+			virtual std::vector<std::string> get_contract_admin(lua_State *L, _CON_ARG_ const char* contract_id) = 0;
+			virtual std::vector<std::string> get_contract_operator(lua_State *L, _CON_ARG_ const char* contract_id) = 0;
+
+			// verify
+			virtual int32_t verify_privilege_admin(lua_State *L, const char* user_address) = 0;
+			virtual int32_t verify_general_admin(lua_State *L, const char* user_address) = 0;
+
+			virtual int32_t verify_contract_admin(lua_State *L, const char* user_address, _CON_ARG_ const char* contract_id) = 0;
+			virtual int32_t verify_contract_operator(lua_State *L, const char* user_address, _CON_ARG_ const char* contract_id) = 0;
+
+			// appoint
+			virtual int32_t appoint_contract_admin(lua_State *L, uint32_t role_sub_type, const char* user_address, _CON_ARG_ const char* contract_id) = 0;
+			virtual int32_t appoint_contract_operator(lua_State *L, uint32_t role_sub_type, const char* user_address, _CON_ARG_ const char* contract_id) = 0;
+
+			// revoke
+			virtual int32_t revoke_contract_admin(lua_State *L, const char* user_address, _CON_ARG_ const char* contract_id) = 0;
+			virtual int32_t revoke_contract_operator(lua_State *L, const char* user_address, _CON_ARG_ const char* contract_id) = 0;
+
+
+			// for CDC data
+			// checkin
+			virtual int32_t checkin_cdcdata_hash(lua_State *L, uint32_t cdcdata_type, const char* cdcdata_hash, const char* remark, _CON_ARG_ const char* caller_address) = 0;
+
+			// verify
+			virtual int32_t verify_cdcdata_hash(lua_State *L, uint32_t cdcdata_type, const char* cdcdata_hash) = 0;
+
+			// abolish
+			virtual int32_t abolish_cdcdata_hash(lua_State *L, uint32_t cdcdata_type, const char* cdcdata_hash) = 0;
+
+
+
           };
 
 
