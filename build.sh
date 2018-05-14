@@ -21,6 +21,6 @@ cd ..
 echo "==============================  Building fc  =================================="
 cd fc
 cmake .
-chmod a+x vendor/secp256k1=zkp/autogen.sh
+chmod a+x vendor/secp256k1-zkp/autogen.sh
 cd ..
 
